@@ -35,7 +35,7 @@ async def reject_if_not_allowed(update: Update, settings: Settings) -> bool:
         return False
 
     if update.effective_message:
-        await update.effective_message.reply_text("Цей бот налаштований лише для одного дозволеного чату.")
+        await update.effective_message.reply_text("Р¦РµР№ Р±РѕС‚ РЅР°Р»Р°С€С‚РѕРІР°РЅРёР№ Р»РёС€Рµ РґР»СЏ РѕРґРЅРѕРіРѕ РґРѕР·РІРѕР»РµРЅРѕРіРѕ С‡Р°С‚Сѓ.")
     return True
 
 
@@ -45,10 +45,10 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         return
 
     message = (
-        "Це бот для перевірки ринків Polymarket у категорії Temperature.\n\n"
-        "Команди:\n"
-        "/help - коротка підказка\n"
-        "/scan - перевірити картки, де сума best ask усіх кошиків більша за 100¢"
+        "Р¦Рµ Р±РѕС‚ РґР»СЏ РїРµСЂРµРІС–СЂРєРё СЂРёРЅРєС–РІ Polymarket Сѓ РєР°С‚РµРіРѕСЂС–С— Temperature.\n\n"
+        "РљРѕРјР°РЅРґРё:\n"
+        "/help - РєРѕСЂРѕС‚РєР° РїС–РґРєР°Р·РєР°\n"
+        "/scan - РїРµСЂРµРІС–СЂРёС‚Рё РєР°СЂС‚РєРё, РґРµ СЃСѓРјР° best ask СѓСЃС–С… РєРѕС€РёРєС–РІ Р±С–Р»СЊС€Р° Р·Р° 100Вў"
     )
     if update.effective_message:
         await update.effective_message.reply_text(message)
@@ -60,11 +60,11 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         return
 
     message = (
-        "Як користуватися ботом:\n"
-        "1. Напишіть /scan\n"
-        "2. Зачекайте кілька секунд\n"
-        "3. Отримаєте список карток, якщо знайдено суму понад 100¢\n\n"
-        "Якщо список порожній, бот так і напише."
+        "РЇРє РєРѕСЂРёСЃС‚СѓРІР°С‚РёСЃСЏ Р±РѕС‚РѕРј:\n"
+        "1. РќР°РїРёС€С–С‚СЊ /scan\n"
+        "2. Р—Р°С‡РµРєР°Р№С‚Рµ РєС–Р»СЊРєР° СЃРµРєСѓРЅРґ\n"
+        "3. РћС‚СЂРёРјР°С”С‚Рµ СЃРїРёСЃРѕРє РєР°СЂС‚РѕРє, СЏРєС‰Рѕ Р·РЅР°Р№РґРµРЅРѕ СЃСѓРјСѓ РїРѕРЅР°Рґ 100Вў\n\n"
+        "РЇРєС‰Рѕ СЃРїРёСЃРѕРє РїРѕСЂРѕР¶РЅС–Р№, Р±РѕС‚ С‚Р°Рє С– РЅР°РїРёС€Рµ."
     )
     if update.effective_message:
         await update.effective_message.reply_text(message)
@@ -100,7 +100,7 @@ async def scan_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
 
     if update.effective_message:
-        await update.effective_message.reply_text("Перевіряю активні ринки Temperature у Polymarket...")
+        await update.effective_message.reply_text("РџРµСЂРµРІС–СЂСЏСЋ Р°РєС‚РёРІРЅС– СЂРёРЅРєРё Temperature Сѓ Polymarket...")
 
     try:
         results = await scan_temperature_markets(client)
@@ -108,9 +108,9 @@ async def scan_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     except (httpx.HTTPError, ValueError) as exc:
         logger.exception("Scan failed")
         text = (
-            "Не вдалося отримати дані з Polymarket прямо зараз. "
-            "Спробуйте ще раз трохи пізніше.\n\n"
-            f"Деталь: {exc}"
+            "РќРµ РІРґР°Р»РѕСЃСЏ РѕС‚СЂРёРјР°С‚Рё РґР°РЅС– Р· Polymarket РїСЂСЏРјРѕ Р·Р°СЂР°Р·. "
+            "РЎРїСЂРѕР±СѓР№С‚Рµ С‰Рµ СЂР°Р· С‚СЂРѕС…Рё РїС–Р·РЅС–С€Рµ.\n\n"
+            f"Р”РµС‚Р°Р»СЊ: {exc}"
         )
 
     if update.effective_message:
